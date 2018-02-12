@@ -10,7 +10,7 @@ class Elevator {
   }
 
   start() { 
-   this.intervalId = window.setInterval(() => this.update(), 1000)
+   this.intervalId = setInterval(() => this.update(), 1000)
   }
   
   stop() { 
@@ -18,11 +18,17 @@ class Elevator {
   }
   
   update() { 
+    if(this.requests.length != 0){
+        this.goToFloor();
+        this._passengersEnter();
+        this.goToFloor();
+        this._passengersLeave();
+    }
     this.log();
   }
-  
+
   _passengersEnter() { 
-    if(this.requests.indexOf(this.floor) != -1){
+    // if(this.requests.indexOf(this.floor) != -1){
         let people = this.waitingList.filter(waitingPerson => waitingPerson.originFloor === this.floor)
         people.forEach(person => {
         this.passengers.push(person)
@@ -36,7 +42,7 @@ class Elevator {
         //console.log(person.name + "has enter the elevator")
         this.requests.splice(this.requests.indexOf(this.floor), 1)
         })
-  }
+  
 }
   
   _passengersLeave() { 
@@ -69,6 +75,20 @@ class Elevator {
   log() { 
    console.log("Direction: " + this.direction + " | Floor: " + this.floor)
   }
+
+  goToFloor() {
+    if(this.requests[1] > this.floor)
+		{ 
+		  for(let i=0; i< this.requests[1] - this.floor; i++){
+		      this.floorUp();
+    }
+    }
+	  else if(this.requests[1] < this.floor){
+      for(let i=0; i< this.floor - this.requests[1]; i++){
+		      this.floorDown();
+        }   
+      }
+    }
 }
 
 module.exports = Elevator;
