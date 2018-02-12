@@ -1,7 +1,7 @@
 const Elevator = require('./elevator.js');
 const Person = require('./person.js');
 
-var elevator = new Elevator
+var elevator = new Elevator();
 elevator.start();
 elevator.update();
 
@@ -13,6 +13,6 @@ var person2 = new Person('Jack', 2, 4)
 // elevator.call(person0);
 // elevator.call(person1);
 // elevator.call(person2);
-var timeoutId0 = setTimeout(() => {elevator.call(person0)}, 3000)
-var timeoutId1 = setTimeout(() => {elevator.call(person1)}, 5000)
-var timeoutId2 = setTimeout(() => {elevator.call(person2)}, 7000)
+var timeoutId0 = setTimeout(() => {elevator.call(person0)}, 3000);
+var timeoutId1 = setTimeout(() => {elevator.call(person1)}, 8000);
+var timeoutId2 = setTimeout(() => {elevator.call(person2)}, 13000);

@@ -23,7 +23,8 @@ class Elevator {
         this._passengersEnter();
         this.goToFloor();
         this._passengersLeave();
-    }
+      }
+      
     this.log();
   }
 
@@ -35,12 +36,13 @@ class Elevator {
         var index = this.waitingList.indexOf(person);
          this.waitingList.splice(index, 1);
          this.requests.push(person.destinationFloor)
-         console.log(person.name + " has entered the elevator")
+       
         //Get all passengers in waitingList with originFloor === this.floor
         //this.waitingFloor remove all people (person)
         //this.requests.push(person.destinationFloor)
         //console.log(person.name + "has enter the elevator")
         this.requests.splice(this.requests.indexOf(this.floor), 1)
+        console.log(person.name + " has entered the elevator")
         })
   
 }
@@ -50,6 +52,7 @@ class Elevator {
       this.passengers.forEach(passenger =>{
         if(passenger.destinationFloor === this.floor){
             this.passengers.splice(this.passengers.indexOf(passenger), 1);
+            this.requests.splice(this.requests.indexOf(this.floor), 1)
             console.log(passenger.name + " has left the elevator")
         }
       })
@@ -74,18 +77,21 @@ class Elevator {
   
   log() { 
    console.log("Direction: " + this.direction + " | Floor: " + this.floor)
+   console.log(this.requests)
+   console.log(this.waitingList)
+   console.log(this.passengers)
   }
 
   goToFloor() {
-    if(this.requests[1] > this.floor)
+    if(this.requests[0] > this.floor)
 		{ 
-		  for(let i=0; i< this.requests[1] - this.floor; i++){
+		  for(let i=0; i< this.requests[0] - this.floor; i++){
 		      this.floorUp();
     }
     }
-	  else if(this.requests[1] < this.floor){
-      for(let i=0; i< this.floor - this.requests[1]; i++){
-		      this.floorDown();
+	  else if(this.requests[0] < this.floor){
+      for(let i=0; i< this.floor - this.requests[0]; i++){
+        this.floorDown();
         }   
       }
     }
